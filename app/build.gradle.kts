@@ -18,7 +18,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kitabisa.test.universitydomains.core.testing.TestRunner"
+
+        buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
     }
 
     buildTypes {
@@ -39,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
