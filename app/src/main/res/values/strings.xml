@@ -9,9 +9,12 @@
     <string name="feature_search_title">Search</string>
     <string name="feature_search_label">Search</string>
     <string name="feature_search_placeholder">Search name…</string>
-    <string name="feature_search_idle_message">What domain you looking for?</string>
+    <string name="feature_search_idle_title">What domain you looking for?</string>
+    <string name="feature_search_idle_message">Start by entering a university name or domain to explore available options.</string>
     <string name="feature_search_empty_title">No Results Found</string>
     <string name="feature_search_empty_message">We couldn’t find any universities matching your search. Try a different keyword.</string>
+    <string name="feature_search_recent_label">"Recent Search"</string>
+    <string name="feature_search_recent_clear">Clear</string>
 
     <string name="feature_favorite_title">Favorite University</string>
     <string name="feature_favorite_label">Favorite</string>

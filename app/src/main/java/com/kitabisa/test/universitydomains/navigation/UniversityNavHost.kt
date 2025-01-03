@@ -20,7 +20,7 @@ fun UniversityNavHost(
         modifier = modifier
     ) {
         homeScreen()
-        searchScreen { }
+        searchScreen()
         favoriteScreen { }
     }
 }
