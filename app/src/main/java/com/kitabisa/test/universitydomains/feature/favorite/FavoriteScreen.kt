@@ -45,7 +45,9 @@ fun FavoriteScreen(
 ) {
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .testTag(TestTag.FAVORITE_SCREEN)
     ) {
         Appbar(title = stringResource(TopLevelDestination.FAVORITE.titleId))
         Box(
