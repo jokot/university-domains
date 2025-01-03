@@ -1,12 +1,11 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+# Ignore all .idea files
+.idea/
+# Allow specific files or directories
+!.idea/codeStyles/
+!.idea/libraries/
 .DS_Store
 /build
 /captures

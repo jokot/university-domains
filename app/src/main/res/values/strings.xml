@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">UniversityDomains</string>
+    <string name="app_name">University Domains</string>
+
+    <string name="feature_home_title">World University Domains</string>
+    <string name="feature_home_label">Home</string>
+
+    <string name="feature_search_title">Search</string>
+    <string name="feature_search_label">Search</string>
+    <string name="feature_search_placeholder">Search name…</string>
+    <string name="feature_search_idle_message">What domain you looking for?</string>
+
+    <string name="feature_favorite_title">Favorite University</string>
+    <string name="feature_favorite_label">Favorite</string>
+
+    <string name="empty_message">No University Found</string>
+    <string name="error_title">Oops! Something Went Wrong"</string>
+    <string name="error_message">Oops! Something Went Wrong"</string>
 </resources>
