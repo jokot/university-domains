@@ -9,7 +9,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 import com.kitabisa.test.universitydomains.core.ui.component.Appbar
 import com.kitabisa.test.universitydomains.navigation.UniversityNavHost
 
@@ -21,6 +23,7 @@ fun UniversityApp(
     val destination = appState.currentTopLevelDestination
 
     Scaffold(
+        modifier = Modifier.testTag(TestTag.UNIVERSITY_APP),
         topBar = {
             Appbar(title = stringResource(destination.titleId))
         },
