@@ -15,12 +15,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoritesViewModel @Inject constructor(
+class FavoriteViewModel @Inject constructor(
     private val favoriteRepository: FavoriteRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<FavoritesUiState>(FavoritesUiState.Loading)
-    val uiState: StateFlow<FavoritesUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<FavoriteUiState>(FavoriteUiState.Loading)
+    val uiState: StateFlow<FavoriteUiState> = _uiState.asStateFlow()
 
     init {
         getUsers()
@@ -30,19 +30,19 @@ class FavoritesViewModel @Inject constructor(
         viewModelScope.launch {
             favoriteRepository.getFavoriteUniversities()
                 .catch { exception ->
-                    _uiState.update { FavoritesUiState.Error(exception.localizedMessage.orEmpty()) }
+                    _uiState.update { FavoriteUiState.Error(exception.localizedMessage.orEmpty()) }
                 }
                 .collect { dataState ->
                     _uiState.update {
                         when (dataState) {
-                            is DataState.Loading -> FavoritesUiState.Loading
+                            is DataState.Loading -> FavoriteUiState.Loading
                             is DataState.Success -> if (dataState.data.isEmpty()) {
-                                FavoritesUiState.Empty
+                                FavoriteUiState.Empty
                             } else {
-                                FavoritesUiState.Success(dataState.data)
+                                FavoriteUiState.Success(dataState.data)
                             }
 
-                            is DataState.Error -> FavoritesUiState.Error(dataState.message)
+                            is DataState.Error -> FavoriteUiState.Error(dataState.message)
                         }
                     }
                 }

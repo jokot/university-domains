@@ -8,8 +8,8 @@ import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.testing.datasource.TestLocalDataSource
 import com.kitabisa.test.universitydomains.core.testing.repository.TestFavoriteRepository
 import com.kitabisa.test.universitydomains.core.testing.util.MainDispatcherRule
-import com.kitabisa.test.universitydomains.feature.favorite.FavoritesUiState
-import com.kitabisa.test.universitydomains.feature.favorite.FavoritesViewModel
+import com.kitabisa.test.universitydomains.feature.favorite.FavoriteUiState
+import com.kitabisa.test.universitydomains.feature.favorite.FavoriteViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -29,7 +29,7 @@ class FavoriteViewModelTest {
     private val testLocalDataSource = TestLocalDataSource()
 
     private lateinit var favoriteRepository: FavoriteRepository
-    private lateinit var viewModel: FavoritesViewModel
+    private lateinit var viewModel: FavoriteViewModel
 
     @Before
     fun setup() {
@@ -43,7 +43,7 @@ class FavoriteViewModelTest {
 
         favoriteRepository = TestFavoriteRepository(favoriteRepository)
 
-        viewModel = FavoritesViewModel(favoriteRepository)
+        viewModel = FavoriteViewModel(favoriteRepository)
     }
 
     @Test
@@ -55,11 +55,11 @@ class FavoriteViewModelTest {
         // Collect flow states
         viewModel.uiState.test {
             // Assert loading state first
-            assertIs<FavoritesUiState.Loading>(awaitItem())
+            assertIs<FavoriteUiState.Loading>(awaitItem())
 
             // Assert success state with expected data
             val successState = awaitItem()
-            assertIs<FavoritesUiState.Success>(successState)
+            assertIs<FavoriteUiState.Success>(successState)
             assertEquals(UniversityTestData.favoriteSavableUniversities, successState.data)
 
             cancelAndIgnoreRemainingEvents()
@@ -73,11 +73,11 @@ class FavoriteViewModelTest {
 
         viewModel.uiState.test {
             // Assert loading state first
-            assertIs<FavoritesUiState.Loading>(awaitItem())
+            assertIs<FavoriteUiState.Loading>(awaitItem())
 
             // Assert empty state
             val emptyState = awaitItem()
-            assertIs<FavoritesUiState.Empty>(emptyState)
+            assertIs<FavoriteUiState.Empty>(emptyState)
 
             cancelAndIgnoreRemainingEvents()
         }
@@ -89,10 +89,10 @@ class FavoriteViewModelTest {
         testLocalDataSource.simulateError(UniversityTestData.errorMessage)
 
         viewModel.uiState.test {
-            assertIs<FavoritesUiState.Loading>(awaitItem())
+            assertIs<FavoriteUiState.Loading>(awaitItem())
 
             val errorState = awaitItem()
-            assertIs<FavoritesUiState.Error>(errorState)
+            assertIs<FavoriteUiState.Error>(errorState)
             assertEquals(UniversityTestData.errorMessage, errorState.message)
 
             cancelAndIgnoreRemainingEvents()
