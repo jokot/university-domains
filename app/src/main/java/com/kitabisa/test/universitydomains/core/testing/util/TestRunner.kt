@@ -1,4 +1,4 @@
-package com.kitabisa.test.universitydomains.core.testing
+package com.kitabisa.test.universitydomains.core.testing.util
 
 import android.app.Application
 import android.content.Context

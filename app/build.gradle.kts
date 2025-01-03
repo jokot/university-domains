@@ -18,7 +18,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.kitabisa.test.universitydomains.core.testing.TestRunner"
+        testInstrumentationRunner = "com.kitabisa.test.universitydomains.core.testing.util.TestRunner"
 
         buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
     }

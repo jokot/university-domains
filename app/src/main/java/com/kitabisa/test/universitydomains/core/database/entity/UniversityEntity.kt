@@ -7,12 +7,13 @@ import com.kitabisa.test.universitydomains.core.model.University
 @Entity(tableName = "university")
 data class UniversityEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Int,
     val alphaTwoCode: String,
     val country: String,
     val domains: List<String>,
     val name: String,
-    val webPages: List<String>
+    val webPages: List<String>,
+    val timestamp: Long = System.currentTimeMillis()
 )
 
 fun UniversityEntity.toDomain() = University(
