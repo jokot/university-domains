@@ -1,29 +1,36 @@
 package com.kitabisa.test.universitydomains.feature.home
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshState
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.ui.component.Appbar
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.LoadingState
-import com.kitabisa.test.universitydomains.core.ui.component.UniversityItem
+import com.kitabisa.test.universitydomains.core.ui.component.UniversityFeed
+import com.kitabisa.test.universitydomains.navigation.TopLevelDestination
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
@@ -31,8 +38,23 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    val coroutineScope = rememberCoroutineScope()
+    val refreshState = rememberPullToRefreshState()
+    var isRefreshing by remember { mutableStateOf(false) }
+    val onRefresh: () -> Unit = {
+        isRefreshing = true
+        coroutineScope.launch {
+            delay(500)
+            viewModel.fetchUniversities()
+            isRefreshing = false
+        }
+    }
+
     HomeScreen(
         uiState = uiState,
+        isRefreshing = isRefreshing,
+        refreshState = refreshState,
+        onRefresh = onRefresh,
         onFavoriteClick = viewModel::toggleFavorite,
         onRetryClick = viewModel::fetchUniversities,
         modifier = modifier
@@ -40,49 +62,53 @@ fun HomeScreen(
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     uiState: HomeUiState,
+    isRefreshing: Boolean,
+    refreshState: PullToRefreshState = rememberPullToRefreshState(),
+    onRefresh: () -> Unit,
     onFavoriteClick: (SavableUniversity) -> Unit,
     onRetryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier
             .fillMaxSize()
             .testTag(TestTag.HOME_SCREEN),
-        contentAlignment = Alignment.Center
     ) {
-        when (uiState) {
-            is HomeUiState.Loading -> {
-                LoadingState()
-            }
+        Appbar(title = stringResource(TopLevelDestination.HOME.titleId))
 
-            is HomeUiState.Error -> {
-                ErrorState(onRetry = onRetryClick)
-            }
+        PullToRefreshBox(
+            modifier = Modifier
+                .fillMaxSize(),
+            state = refreshState,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh,
+            contentAlignment = Alignment.Center
+        ) {
+            when (uiState) {
+                is HomeUiState.Loading -> {
+                    LoadingState()
+                }
 
-            is HomeUiState.Empty -> {
-                EmptyState(
-                    title = stringResource(R.string.feature_home_empty_title),
-                    message = stringResource(R.string.feature_home_empty_message)
-                )
-            }
+                is HomeUiState.Error -> {
+                    ErrorState(onRetryClick = onRetryClick)
+                }
 
-            is HomeUiState.Success -> {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(uiState.data) { savableUniversity ->
-                        UniversityItem(
-                            savableUniversity = savableUniversity,
-                            onFavoriteClick = onFavoriteClick
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
-                        )
-                    }
+                is HomeUiState.Empty -> {
+                    EmptyState(
+                        title = stringResource(R.string.feature_home_empty_title),
+                        message = stringResource(R.string.feature_home_empty_message)
+                    )
+                }
+
+                is HomeUiState.Success -> {
+                    UniversityFeed(
+                        savableUniversities = uiState.data,
+                        onFavoriteClick = onFavoriteClick
+                    )
                 }
             }
         }

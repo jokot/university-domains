@@ -6,18 +6,17 @@ import com.kitabisa.test.universitydomains.core.model.University
 
 @Entity(tableName = "university")
 data class UniversityEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     val alphaTwoCode: String,
     val country: String,
     val domains: List<String>,
+
+    @PrimaryKey
     val name: String,
     val webPages: List<String>,
     val timestamp: Long = System.currentTimeMillis()
 )
 
 fun UniversityEntity.toDomain() = University(
-    id = id,
     alphaTwoCode = alphaTwoCode,
     country = country,
     domains = domains,
@@ -26,7 +25,6 @@ fun UniversityEntity.toDomain() = University(
 )
 
 fun University.toEntity() = UniversityEntity(
-    id = id,
     alphaTwoCode = alphaTwoCode,
     country = country,
     domains = domains,

@@ -3,6 +3,7 @@ package com.kitabisa.test.universitydomains.core.database.di
 import android.content.Context
 import androidx.room.Room
 import com.kitabisa.test.universitydomains.core.database.AppDatabase
+import com.kitabisa.test.universitydomains.core.database.dao.RecentSearchDao
 import com.kitabisa.test.universitydomains.core.database.dao.UniversityDao
 import dagger.Module
 import dagger.Provides
@@ -34,6 +35,12 @@ object DatabaseModule {
     fun provideUniversityDao(
         appDatabase: AppDatabase
     ): UniversityDao = appDatabase.universityDao()
+
+    @Provides
+    @Singleton
+    fun provideRecentSearchDao(
+        appDatabase: AppDatabase
+    ): RecentSearchDao = appDatabase.recentSearchDao()
 
     @Provides
     @IoDispatcher

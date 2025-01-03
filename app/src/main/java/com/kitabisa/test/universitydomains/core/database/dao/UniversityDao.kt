@@ -10,8 +10,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UniversityDao {
 
-    @Query("SELECT * FROM university ORDER BY id")
+    @Query("SELECT * FROM university ORDER BY name")
     fun getUniversities(): Flow<List<UniversityEntity>>
+
+    @Query(
+        """
+        SELECT * FROM university 
+        WHERE name LIKE '%' || :query || '%' COLLATE NOCASE 
+           OR domains LIKE '%' || :query || '%' COLLATE NOCASE
+    """
+    )
+    fun getUniversitiesByName(query: String): Flow<List<UniversityEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUniversities(universities: List<UniversityEntity>)

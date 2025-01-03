@@ -4,6 +4,8 @@ import com.kitabisa.test.universitydomains.core.data.repository.FavoriteReposito
 import com.kitabisa.test.universitydomains.core.data.repository.FavoriteRepositoryImpl
 import com.kitabisa.test.universitydomains.core.data.repository.HomeRepository
 import com.kitabisa.test.universitydomains.core.data.repository.HomeRepositoryImpl
+import com.kitabisa.test.universitydomains.core.data.repository.RecentSearchesRepository
+import com.kitabisa.test.universitydomains.core.data.repository.RecentSearchesRepositoryImpl
 import com.kitabisa.test.universitydomains.core.data.repository.SearchRepository
 import com.kitabisa.test.universitydomains.core.data.repository.SearchRepositoryImpl
 import dagger.Binds
@@ -29,4 +31,9 @@ abstract class DataModule {
     abstract fun bindSearchRepository(
         searchRepositoryImpl: SearchRepositoryImpl
     ): SearchRepository
+
+    @Binds
+    abstract fun bindRecentSearchRepository(
+        recentSearchesRepositoryImpl: RecentSearchesRepositoryImpl
+    ): RecentSearchesRepository
 }

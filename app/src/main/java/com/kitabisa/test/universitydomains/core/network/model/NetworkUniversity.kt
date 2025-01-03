@@ -19,7 +19,6 @@ data class NetworkUniversity(
 )
 
 fun NetworkUniversity.toDomain() = University(
-    id = 0,
     alphaTwoCode = alphaTwoCode.orEmpty(),
     country = country.orEmpty(),
     domains = domains.orEmpty(),

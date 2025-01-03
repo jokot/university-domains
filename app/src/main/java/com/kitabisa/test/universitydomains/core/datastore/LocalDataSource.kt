@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface LocalDataSource {
-    fun getFavorites(): Flow<Set<Int>>
-    suspend fun toggleFavorite(id: Int, isFavorite: Boolean)
+    fun getFavorites(): Flow<Set<String>>
+    suspend fun toggleFavorite(name: String, isFavorite: Boolean)
     fun getIsFetch(): Flow<Boolean>
     suspend fun setDataIsFetch()
 }
@@ -17,34 +17,33 @@ interface LocalDataSource {
 class LocalDataSourceImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : LocalDataSource {
-    override fun getFavorites(): Flow<Set<Int>> = dataStore.data
+    override fun getFavorites(): Flow<Set<String>> = dataStore.data
         .map { preferences ->
-            preferences[DatastoreKey.FAVORITES]
-                .orEmpty()
-                .mapNotNull { it.toIntOrNull() }
-                .toSet()
+            preferences[DatastoreKey.FAVORITES].orEmpty()
         }
 
-    override suspend fun toggleFavorite(id: Int, isFavorite: Boolean) {
+    override suspend fun toggleFavorite(name: String, isFavorite: Boolean) {
         dataStore.edit { preferences ->
             val currentFavorites = preferences[DatastoreKey.FAVORITES].orEmpty().toMutableSet()
 
             if (isFavorite) {
-                currentFavorites.add(id.toString())
+                currentFavorites.add(name)
             } else {
-                currentFavorites.remove(id.toString())
+                currentFavorites.remove(name)
             }
 
             preferences[DatastoreKey.FAVORITES] = currentFavorites
         }
     }
 
-    override fun getIsFetch(): Flow<Boolean> {
-        TODO("Not yet implemented")
-    }
+    override fun getIsFetch(): Flow<Boolean> = dataStore.data
+        .map { preferences ->
+            preferences[DatastoreKey.IS_FETCHED] ?: false
+        }
 
     override suspend fun setDataIsFetch() {
-        TODO("Not yet implemented")
+        dataStore.edit { preferences ->
+            preferences[DatastoreKey.IS_FETCHED] = true
+        }
     }
-
 }

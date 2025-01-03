@@ -38,5 +38,17 @@ object UniversityTestData {
         )
     }
 
-    val errorMessage = "Error Test Message"
+    const val errorMessage = "Error Test Message"
+
+    val query = universities.first().name
+
+    const val unknown = "unknown"
+
+    val recentSearchEntities = universities.map {
+        it.name
+    }
+
+    val universitiesFilterByQuery = savableUniversities.filter {
+        it.university.name == query
+    }
 }

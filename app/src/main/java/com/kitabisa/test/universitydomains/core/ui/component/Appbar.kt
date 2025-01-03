@@ -1,5 +1,6 @@
 package com.kitabisa.test.universitydomains.core.ui.component
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,6 +23,7 @@ fun Appbar(
     val context = LocalContext.current
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0, 0, 0, 0),
         title = {
             Text(title, style = MaterialTheme.typography.titleLarge)
         },

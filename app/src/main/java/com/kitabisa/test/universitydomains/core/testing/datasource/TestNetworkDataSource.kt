@@ -24,7 +24,16 @@ class TestNetworkDataSource : NetworkDataSource {
     }
 
     override suspend fun searchUniversity(name: String): NetworkResult<List<NetworkUniversity>> {
-        TODO("Not yet implemented")
-    }
+        // Simulate a filtered search result based on the name
+        val allResults =
+            _networkResultFlow.replayCache.firstOrNull() ?: NetworkResult.Success(emptyList())
 
+        return if (allResults is NetworkResult.Success) {
+            val filteredResults =
+                allResults.data.filter { it.name.orEmpty().contains(name, ignoreCase = true) }
+            NetworkResult.Success(filteredResults)
+        } else {
+            allResults
+        }
+    }
 }

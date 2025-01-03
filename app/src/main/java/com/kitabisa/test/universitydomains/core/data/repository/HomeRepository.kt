@@ -34,23 +34,29 @@ class HomeRepositoryImpl @Inject constructor(
         // Emit loading state
         emit(DataState.Loading)
 
+        // Get the fetch status
+        val isFetched = localDataSource.getIsFetch().firstOrNull() ?: false
+
         // Query local database
         val localUniversitiesFlow = universityDao.getUniversities()
 
         // Collect initial data from the local database
         val initialData = localUniversitiesFlow.firstOrNull()
 
-        if (initialData.isNullOrEmpty()) {
+        if (initialData.isNullOrEmpty() || !isFetched) {
             // If the database is empty, fetch from the network
             when (val networkResult = networkDataSource.getUniversities()) {
                 is NetworkResult.Error -> {
                     emit(DataState.Error(networkResult.message))
+                    return@flow
                 }
 
                 is NetworkResult.Success -> {
                     // Insert fetched data into the database
                     val universities = networkResult.data.map { it.toDomain().toEntity() }
                     universityDao.insertUniversities(universities)
+
+                    localDataSource.setDataIsFetch()
                 }
             }
         }
@@ -64,7 +70,7 @@ class HomeRepositoryImpl @Inject constructor(
                 val university = entity.toDomain()
                 SavableUniversity(
                     university = university,
-                    isFavorite = university.id in favorites
+                    isFavorite = university.name in favorites
                 )
             }
         }.collect { savableUniversities ->
@@ -75,7 +81,7 @@ class HomeRepositoryImpl @Inject constructor(
     override suspend fun toggleFavorite(savableUniversity: SavableUniversity) {
         withContext(dispatcher) {
             localDataSource.toggleFavorite(
-                savableUniversity.university.id,
+                savableUniversity.university.name,
                 savableUniversity.isFavorite
             )
         }

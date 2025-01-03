@@ -1,5 +1,6 @@
 package com.kitabisa.test.universitydomains.screen
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -11,6 +12,7 @@ import com.kitabisa.test.universitydomains.feature.home.HomeUiState
 import org.junit.Rule
 import org.junit.Test
 
+@OptIn(ExperimentalMaterial3Api::class)
 class HomeScreenTest {
 
     @get:Rule
@@ -21,8 +23,10 @@ class HomeScreenTest {
         composeTestRule.setContent {
             HomeScreen(
                 uiState = HomeUiState.Success(UniversityTestData.savableUniversities),
+                isRefreshing = false,
+                onRefresh = {},
                 onFavoriteClick = {},
-                onRetryClick = {}
+                onRetryClick = {},
             )
         }
 
@@ -40,8 +44,10 @@ class HomeScreenTest {
         composeTestRule.setContent {
             HomeScreen(
                 uiState = HomeUiState.Loading,
+                isRefreshing = false,
+                onRefresh = {},
                 onFavoriteClick = {},
-                onRetryClick = {}
+                onRetryClick = {},
             )
         }
 
@@ -59,8 +65,10 @@ class HomeScreenTest {
         composeTestRule.setContent {
             HomeScreen(
                 uiState = HomeUiState.Error(UniversityTestData.errorMessage),
+                isRefreshing = false,
+                onRefresh = {},
                 onFavoriteClick = {},
-                onRetryClick = {}
+                onRetryClick = {},
             )
         }
 
@@ -78,8 +86,10 @@ class HomeScreenTest {
         composeTestRule.setContent {
             HomeScreen(
                 uiState = HomeUiState.Empty,
+                isRefreshing = false,
+                onRefresh = {},
                 onFavoriteClick = {},
-                onRetryClick = {}
+                onRetryClick = {},
             )
         }
 

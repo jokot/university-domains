@@ -13,21 +13,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 
 @Composable
-fun EmptyState(
-    modifier: Modifier = Modifier,
-    title: String,
-    message: String
+fun IdleState(
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp)
-            .testTag(TestTag.EMPTY_STATE),
+            .testTag(TestTag.IDLE_STATE),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -35,7 +35,7 @@ fun EmptyState(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = title,
+                text = stringResource(R.string.feature_search_idle_title),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center
@@ -44,7 +44,7 @@ fun EmptyState(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = message,
+                text = stringResource(R.string.feature_search_idle_message),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
