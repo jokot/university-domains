@@ -12,7 +12,8 @@ data class UniversityEntity(
     val country: String,
     val domains: List<String>,
     val name: String,
-    val webPages: List<String>
+    val webPages: List<String>,
+    val timestamp: Long = System.currentTimeMillis()
 )
 
 fun UniversityEntity.toDomain() = University(
