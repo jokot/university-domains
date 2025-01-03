@@ -70,7 +70,7 @@ class HomeRepositoryImpl @Inject constructor(
                 val university = entity.toDomain()
                 SavableUniversity(
                     university = university,
-                    isFavorite = university.id in favorites
+                    isFavorite = university.name in favorites
                 )
             }
         }.collect { savableUniversities ->
@@ -81,7 +81,7 @@ class HomeRepositoryImpl @Inject constructor(
     override suspend fun toggleFavorite(savableUniversity: SavableUniversity) {
         withContext(dispatcher) {
             localDataSource.toggleFavorite(
-                savableUniversity.university.id,
+                savableUniversity.university.name,
                 savableUniversity.isFavorite
             )
         }

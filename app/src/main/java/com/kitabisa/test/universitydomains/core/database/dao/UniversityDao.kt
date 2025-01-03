@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UniversityDao {
 
-    @Query("SELECT * FROM university ORDER BY id")
+    @Query("SELECT * FROM university ORDER BY name")
     fun getUniversities(): Flow<List<UniversityEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
