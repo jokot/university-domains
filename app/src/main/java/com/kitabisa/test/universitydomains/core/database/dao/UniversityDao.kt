@@ -14,5 +14,5 @@ interface UniversityDao {
     fun getUniversities(): Flow<List<UniversityEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUniversities(users: List<UniversityEntity>)
+    suspend fun insertUniversities(universities: List<UniversityEntity>)
 }
