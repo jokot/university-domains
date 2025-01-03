@@ -23,12 +23,12 @@ import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 @Composable
 fun ErrorState(
     modifier: Modifier = Modifier,
-    onRetry: () -> Unit = {}
+    onRetryClick: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(24.dp)
             .testTag(TestTag.ERROR_STATE),
         contentAlignment = Alignment.Center
     ) {
@@ -38,7 +38,7 @@ fun ErrorState(
         ) {
             Text(
                 text = stringResource(R.string.error_title),
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.error,
                 textAlign = TextAlign.Center
             )
@@ -54,7 +54,7 @@ fun ErrorState(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = onRetry) {
+            Button(onClick = onRetryClick) {
                 Text(text = stringResource(R.string.error_button_retry))
             }
         }

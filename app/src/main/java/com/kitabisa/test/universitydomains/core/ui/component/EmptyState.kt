@@ -26,7 +26,7 @@ fun EmptyState(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(24.dp)
             .testTag(TestTag.EMPTY_STATE),
         contentAlignment = Alignment.Center
     ) {
@@ -36,7 +36,7 @@ fun EmptyState(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center
             )
