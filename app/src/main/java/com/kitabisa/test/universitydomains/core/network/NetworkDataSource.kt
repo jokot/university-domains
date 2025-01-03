@@ -27,6 +27,16 @@ class NetworkDataSourceImpl @Inject constructor(
     }
 
     override suspend fun searchUniversity(name: String): NetworkResult<List<NetworkUniversity>> {
-        TODO("Not yet implemented")
+        return try {
+            val response = apiService.searchUniversities(name)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                NetworkResult.Success(body)
+            } else {
+                NetworkResult.Error(response.message())
+            }
+        } catch (e: Exception) {
+            NetworkResult.Error(e.localizedMessage.orEmpty())
+        }
     }
 }
