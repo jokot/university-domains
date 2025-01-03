@@ -11,8 +11,8 @@ class TestRecentSearchDao : RecentSearchDao {
     private val _recentSearchesFlow = MutableStateFlow<List<RecentSearchEntity>>(emptyList())
 
     // Test-only method to emit network results
-    fun sendDatabaseResult(networkResult: List<String>) {
-        _recentSearchesFlow.tryEmit(networkResult.map { RecentSearchEntity(it) })
+    fun sendRecentSearch(recentSearch: List<String>) {
+        _recentSearchesFlow.tryEmit(recentSearch.map { RecentSearchEntity(it) })
     }
 
     override fun getRecentSearches(): Flow<List<RecentSearchEntity>> = _recentSearchesFlow

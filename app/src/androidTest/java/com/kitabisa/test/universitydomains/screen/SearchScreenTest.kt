@@ -127,7 +127,7 @@ class SearchScreenTest {
         composeTestRule.setContent {
             SearchScreen(
                 searchResultUiState = SearchResultUiState.Idle,
-                recentSearchesUiState = RecentSearchesUiState.Recent(UniversityTestData.recentSearchEntities),
+                recentSearchesUiState = RecentSearchesUiState.Recent(UniversityTestData.recentSearch),
                 query = TextFieldValue(""),
                 onQueryChange = {},
                 onSearchTriggered = {},
@@ -148,7 +148,7 @@ class SearchScreenTest {
             .assertIsDisplayed()
 
         composeTestRule
-            .onNodeWithText(UniversityTestData.recentSearchEntities.first())
+            .onNodeWithText(UniversityTestData.recentSearch.first())
             .assertExists()
     }
 

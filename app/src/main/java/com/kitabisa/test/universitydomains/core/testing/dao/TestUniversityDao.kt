@@ -2,6 +2,8 @@ package com.kitabisa.test.universitydomains.core.testing.dao
 
 import com.kitabisa.test.universitydomains.core.database.dao.UniversityDao
 import com.kitabisa.test.universitydomains.core.database.entity.UniversityEntity
+import com.kitabisa.test.universitydomains.core.database.entity.toEntity
+import com.kitabisa.test.universitydomains.core.model.University
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -12,6 +14,11 @@ class TestUniversityDao : UniversityDao {
 
     override fun getUniversities(): Flow<List<UniversityEntity>> = _localUniversitiesFlow
 
+    // Test-only method to emit network results
+    fun sendUniversities(universities: List<University>) {
+        _localUniversitiesFlow.tryEmit(universities.map(University::toEntity))
+    }
+
     override fun getUniversitiesByName(query: String): Flow<List<UniversityEntity>> {
         return _localUniversitiesFlow.map { universities ->
             universities.filter { entity ->
@@ -19,6 +26,10 @@ class TestUniversityDao : UniversityDao {
                         entity.domains.any { domain -> domain.contains(query, ignoreCase = true) }
             }
         }
+    }
+
+    override suspend fun getUniversitiesByNames(names: List<String>): List<UniversityEntity> {
+        return _localUniversitiesFlow.value.filter { it.name in names }
     }
 
     override suspend fun insertUniversities(universities: List<UniversityEntity>) {

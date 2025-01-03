@@ -21,6 +21,6 @@ fun UniversityNavHost(
     ) {
         homeScreen()
         searchScreen()
-        favoriteScreen { }
+        favoriteScreen()
     }
 }
