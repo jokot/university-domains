@@ -15,19 +15,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val usersRepository: HomeRepository
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     init {
-        fetchUsers()
+        fetchUniversities()
     }
 
-    fun fetchUsers() {
+    fun fetchUniversities() {
         viewModelScope.launch {
-            usersRepository.getUniversities().collect { dataState ->
+            homeRepository.getUniversities().collect { dataState ->
                 _uiState.update {
                     when (dataState) {
                         is DataState.Loading -> HomeUiState.Loading
@@ -45,7 +45,7 @@ class HomeViewModel @Inject constructor(
 
     fun toggleFavorite(savableUniversity: SavableUniversity) {
         viewModelScope.launch {
-            usersRepository.toggleFavorite(savableUniversity)
+            homeRepository.toggleFavorite(savableUniversity)
         }
     }
 }

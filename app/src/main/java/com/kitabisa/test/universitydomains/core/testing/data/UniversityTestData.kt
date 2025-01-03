@@ -1,5 +1,6 @@
 package com.kitabisa.test.universitydomains.core.testing.data
 
+import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.network.model.NetworkUniversity
 import com.kitabisa.test.universitydomains.core.network.model.toDomain
 
@@ -29,4 +30,13 @@ object UniversityTestData {
     )
 
     val universities = networkUniversities.map(NetworkUniversity::toDomain)
+
+    val savableUniversities = universities.map {
+        SavableUniversity(
+            university = it,
+            isFavorite = false
+        )
+    }
+
+    val errorMessage = "Error Test Message"
 }
