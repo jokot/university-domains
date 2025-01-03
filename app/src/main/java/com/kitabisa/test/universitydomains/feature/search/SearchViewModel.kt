@@ -122,15 +122,15 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun saveRecentSearch(username: String) {
+    private fun saveRecentSearch(name: String) {
         viewModelScope.launch {
-            recentSearchesRepository.saveRecentSearch(username)
+            recentSearchesRepository.saveRecentSearch(name)
         }
     }
 
-    fun removeRecentSearch(username: String) {
+    fun removeRecentSearch(name: String) {
         viewModelScope.launch {
-            recentSearchesRepository.removeRecentSearch(username)
+            recentSearchesRepository.removeRecentSearch(name)
         }
     }
 
