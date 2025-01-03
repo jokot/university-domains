@@ -137,14 +137,14 @@ class SearchViewModelTest {
     @Test
     fun `when recent searches are updated recentSearchesUiState should reflect changes`() =
         runTest {
-            val recentSearches = UniversityTestData.recentSearchEntities
+            val recentSearche = UniversityTestData.recentSearch
 
-            testRecentSearchDao.sendDatabaseResult(recentSearches)
+            testRecentSearchDao.sendRecentSearch(recentSearche)
 
             viewModel.recentSearchesUiState.test {
                 val recentState = awaitItem()
                 assertIs<RecentSearchesUiState.Recent>(recentState)
-                assertEquals(recentSearches, recentState.data)
+                assertEquals(recentSearche, recentState.data)
             }
         }
 

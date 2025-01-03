@@ -38,13 +38,18 @@ object UniversityTestData {
         )
     }
 
+    val favoriteSavableUniversities =
+        savableUniversities.map { it.copy(isFavorite = true) }.subList(0, 2)
+
+    val favorites = favoriteSavableUniversities.map { it.university.name }
+
     const val errorMessage = "Error Test Message"
 
     val query = universities.first().name
 
     const val unknown = "unknown"
 
-    val recentSearchEntities = universities.map {
+    val recentSearch = universities.map {
         it.name
     }
 
