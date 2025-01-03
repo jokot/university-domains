@@ -19,7 +19,7 @@ fun UniversityNavHost(
         startDestination = BaseRoute,
         modifier = modifier
     ) {
-        homeScreen { }
+        homeScreen()
         searchScreen { }
         favoriteScreen { }
     }
