@@ -39,12 +39,14 @@ class LocalDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getIsFetch(): Flow<Boolean> {
-        TODO("Not yet implemented")
-    }
+    override fun getIsFetch(): Flow<Boolean> = dataStore.data
+        .map { preferences ->
+            preferences[DatastoreKey.IS_FETCHED] ?: false
+        }
 
     override suspend fun setDataIsFetch() {
-        TODO("Not yet implemented")
+        dataStore.edit { preferences ->
+            preferences[DatastoreKey.IS_FETCHED] = true
+        }
     }
-
 }

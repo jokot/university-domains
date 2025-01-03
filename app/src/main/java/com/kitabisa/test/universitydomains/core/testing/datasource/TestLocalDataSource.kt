@@ -7,21 +7,21 @@ import kotlinx.coroutines.flow.update
 
 class TestLocalDataSource : LocalDataSource {
 
-    private val _favoritesFlow = MutableStateFlow<Set<Int>>(emptySet())
+    private val _favoritesFlow = MutableStateFlow<Set<String>>(emptySet())
 
-    override fun getFavorites(): Flow<Set<Int>> = _favoritesFlow
+    private val _isFetchFlow = MutableStateFlow<Boolean>(false)
 
-    override suspend fun toggleFavorite(id: Int, isFavorite: Boolean) {
+    override fun getFavorites(): Flow<Set<String>> = _favoritesFlow
+
+    override suspend fun toggleFavorite(name: String, isFavorite: Boolean) {
         _favoritesFlow.update { current ->
-            if (isFavorite) current + id else current - id
+            if (isFavorite) current + name else current - name
         }
     }
 
-    override fun getIsFetch(): Flow<Boolean> {
-        TODO("Not yet implemented")
-    }
+    override fun getIsFetch(): Flow<Boolean> = _isFetchFlow
 
     override suspend fun setDataIsFetch() {
-        TODO("Not yet implemented")
+        _isFetchFlow.value = true
     }
 }
