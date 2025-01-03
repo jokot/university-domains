@@ -27,7 +27,7 @@ fun IdleState(
         modifier = modifier
             .fillMaxSize()
             .padding(24.dp)
-            .testTag(TestTag.EMPTY_STATE),
+            .testTag(TestTag.IDLE_STATE),
         contentAlignment = Alignment.Center
     ) {
         Column(

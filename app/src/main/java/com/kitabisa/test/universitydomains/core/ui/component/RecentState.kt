@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 import com.kitabisa.test.universitydomains.core.ui.component.RecentSearchItem
 import com.kitabisa.test.universitydomains.core.ui.component.RecentSearchLabel
 
@@ -18,6 +20,7 @@ fun RecentState(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .testTag(TestTag.RECENT_STATE)
     ) {
         RecentSearchLabel(onClearClick = onClearRecentSearches)
         recentSearches.forEach { recent ->

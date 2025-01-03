@@ -8,12 +8,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ajaib.assessment.github.core.ui.RecentState
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
+import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.IdleState
@@ -61,7 +63,8 @@ fun SearchScreen(
 ) {
     Column(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .testTag(TestTag.SEARCH_SCREEN)
     ) {
         SearchAppBar(
             query = query,
