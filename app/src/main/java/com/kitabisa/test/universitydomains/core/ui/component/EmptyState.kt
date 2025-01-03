@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 
 @Composable
 fun EmptyState(
@@ -24,7 +26,8 @@ fun EmptyState(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .testTag(TestTag.EMPTY_STATE),
         contentAlignment = Alignment.Center
     ) {
         Column(

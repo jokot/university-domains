@@ -12,11 +12,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
+import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.LoadingState
@@ -32,6 +34,7 @@ fun HomeScreen(
     HomeScreen(
         uiState = uiState,
         onFavoriteClick = viewModel::toggleFavorite,
+        onRetryClick = viewModel::fetchUniversities,
         modifier = modifier
     )
 
@@ -41,10 +44,13 @@ fun HomeScreen(
 fun HomeScreen(
     uiState: HomeUiState,
     onFavoriteClick: (SavableUniversity) -> Unit,
+    onRetryClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .testTag(TestTag.HOME_SCREEN),
         contentAlignment = Alignment.Center
     ) {
         when (uiState) {
@@ -53,9 +59,7 @@ fun HomeScreen(
             }
 
             is HomeUiState.Error -> {
-                ErrorState {
-
-                }
+                ErrorState(onRetry = onRetryClick)
             }
 
             is HomeUiState.Empty -> {
