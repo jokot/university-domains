@@ -8,17 +8,17 @@ plugins {
 }
 
 android {
-    namespace = "com.kitabisa.test.universitydomains"
+    namespace = "com.example.universitydomains"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.kitabisa.test.universitydomains"
+        applicationId = "com.example.universitydomains"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.kitabisa.test.universitydomains.core.testing.util.TestRunner"
+        testInstrumentationRunner = "com.example.universitydomains.core.testing.util.TestRunner"
 
         buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
     }
