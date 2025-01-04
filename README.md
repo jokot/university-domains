@@ -8,12 +8,9 @@ This project uses the [University Domains List API](https://github.com/Hipo/univ
 
 ## Screenshots
 Here are some screenshots of the application:
-- **Home Screen**
-  ![Home](screenshots/home.png)
-- **Search Screen**
-  ![Search](screenshots/search.png)
-- **Favorites Screen**
-  ![Favorites](screenshots/favorite.png)
+| **Home Screen**      | **Search Screen**    | **Favorite Screen** |
+|-----------------------|----------------------|-----------------------|
+| ![Home](screenshots/home.png) | ![Search](screenshots/search.png) | ![Favorites](screenshots/favorite.png) |
 
 ## APIs Used
 The project leverages the following endpoints from the University Domains List API:
