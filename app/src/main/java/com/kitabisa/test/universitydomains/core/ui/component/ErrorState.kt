@@ -16,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 
 @Composable
 fun ErrorState(
@@ -58,5 +60,13 @@ fun ErrorState(
                 Text(text = stringResource(R.string.error_button_retry))
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun ErrorStatePreview() {
+    UniversityDomainsTheme {
+        ErrorState()
     }
 }
