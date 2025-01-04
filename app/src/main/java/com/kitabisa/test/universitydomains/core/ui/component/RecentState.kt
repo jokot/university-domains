@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.component.RecentSearchItem
 import com.kitabisa.test.universitydomains.core.ui.component.RecentSearchLabel
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 
 @Composable
 fun RecentState(
@@ -30,5 +33,18 @@ fun RecentState(
                 onRemoveRecentSearchClick = onRemoveRecentSearchClick
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun RecentStatePreview() {
+    UniversityDomainsTheme {
+        RecentState(
+            recentSearches = UniversityTestData.recentSearch,
+            onClearRecentSearches = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {}
+        )
     }
 }

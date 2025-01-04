@@ -23,8 +23,11 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import com.kitabisa.test.universitydomains.R
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.icon.UniversityIcons
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,4 +91,30 @@ fun SearchAppBar(
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun SearchAppBarWithQueryPreview() {
+    UniversityDomainsTheme {
+        SearchAppBar(
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRefreshClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun SearchAppBarEmptyPreview() {
+    UniversityDomainsTheme {
+        SearchAppBar(
+            query = TextFieldValue(""),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRefreshClick = {}
+        )
+    }
 }

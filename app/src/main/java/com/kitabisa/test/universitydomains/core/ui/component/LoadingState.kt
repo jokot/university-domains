@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 
 @Composable
 fun LoadingState(modifier: Modifier = Modifier) {
@@ -18,5 +20,13 @@ fun LoadingState(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
+    }
+}
+
+@Preview
+@Composable
+private fun LoadingStatePreview() {
+    UniversityDomainsTheme {
+        LoadingState()
     }
 }

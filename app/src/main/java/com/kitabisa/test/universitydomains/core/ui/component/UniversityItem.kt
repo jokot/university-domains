@@ -19,9 +19,12 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.icon.UniversityIcons
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 import com.kitabisa.test.universitydomains.core.util.IntentUtils
 import com.kitabisa.test.universitydomains.core.util.countryCodeToEmojiFlag
 
@@ -90,5 +93,25 @@ fun UniversityItem(
                 tint = if (savableUniversity.isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun UniversityItemNotFavoritePreview() {
+    UniversityDomainsTheme {
+        UniversityItem(
+            savableUniversity = UniversityTestData.savableUniversities.first()
+        ) {}
+    }
+}
+
+@Preview
+@Composable
+private fun UniversityItemFavoritePreview() {
+    UniversityDomainsTheme {
+        UniversityItem(
+            savableUniversity = UniversityTestData.favoriteSavableUniversities.first()
+        ) {}
     }
 }
