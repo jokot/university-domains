@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ajaib.assessment.github.core.ui.RecentState
+import com.kitabisa.test.universitydomains.core.ui.component.RecentState
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag

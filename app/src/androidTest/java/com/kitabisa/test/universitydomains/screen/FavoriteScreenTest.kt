@@ -17,7 +17,7 @@ class FavoriteScreenTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun usersAreDisplayed() {
+    fun universitiesAreDisplayed() {
         composeTestRule.setContent {
             FavoriteScreen(
                 uiState = FavoriteUiState.Success(UniversityTestData.savableUniversities),

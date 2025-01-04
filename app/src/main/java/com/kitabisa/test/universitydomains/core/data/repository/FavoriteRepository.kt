@@ -31,14 +31,14 @@ class FavoriteRepositoryImpl @Inject constructor(
         localDataSource.getFavorites()
             .map { name ->
                 // Convert Set<String> to List<String> and fetch all users at once
-                val users = universityDao.getUniversitiesByNames(name.toList())
+                val universities = universityDao.getUniversitiesByNames(name.toList())
                     .map {
                         SavableUniversity(
                             university = it.toDomain(),
                             isFavorite = true
                         )
                     }
-                DataState.Success(users)
+                DataState.Success(universities)
             }
             .catch { e ->
                 emit(DataState.Error(e.message ?: "Unknown error occurred"))

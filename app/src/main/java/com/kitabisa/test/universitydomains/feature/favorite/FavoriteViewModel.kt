@@ -23,10 +23,10 @@ class FavoriteViewModel @Inject constructor(
     val uiState: StateFlow<FavoriteUiState> = _uiState.asStateFlow()
 
     init {
-        getUsers()
+        getUniversities()
     }
 
-    fun getUsers() {
+    fun getUniversities() {
         viewModelScope.launch {
             favoriteRepository.getFavoriteUniversities()
                 .catch { exception ->

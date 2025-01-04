@@ -35,7 +35,7 @@ fun FavoriteScreen(
         modifier = modifier,
         uiState = uiState,
         onFavoriteClick = viewModel::toggleFavorite,
-        onRetryClick = viewModel::getUsers
+        onRetryClick = viewModel::getUniversities
     )
 }
 
