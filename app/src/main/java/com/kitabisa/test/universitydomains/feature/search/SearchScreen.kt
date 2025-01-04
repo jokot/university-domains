@@ -11,17 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ajaib.assessment.github.core.ui.RecentState
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.IdleState
 import com.kitabisa.test.universitydomains.core.ui.component.LoadingState
 import com.kitabisa.test.universitydomains.core.ui.component.SearchAppBar
 import com.kitabisa.test.universitydomains.core.ui.component.UniversityFeed
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 
 @Composable
 fun SearchScreen(
@@ -119,5 +122,119 @@ fun SearchScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenSuccessPreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Success(UniversityTestData.universitiesFilterByQuery),
+            recentSearchesUiState = RecentSearchesUiState.Empty,
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenLoadingPreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Loading,
+            recentSearchesUiState = RecentSearchesUiState.Empty,
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenErrorPreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Error(UniversityTestData.errorMessage),
+            recentSearchesUiState = RecentSearchesUiState.Empty,
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenEmptyPreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Empty,
+            recentSearchesUiState = RecentSearchesUiState.Empty,
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenIdlePreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Idle,
+            recentSearchesUiState = RecentSearchesUiState.Empty,
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenRecentPreview() {
+    UniversityDomainsTheme {
+        SearchScreen(
+            searchResultUiState = SearchResultUiState.Idle,
+            recentSearchesUiState = RecentSearchesUiState.Recent(UniversityTestData.recentSearch),
+            query = TextFieldValue(UniversityTestData.query),
+            onQueryChange = {},
+            onSearchTriggered = {},
+            onRecentSearchClick = {},
+            onRemoveRecentSearchClick = {},
+            onClearRecentSearches = {},
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
     }
 }

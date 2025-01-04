@@ -10,15 +10,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.component.Appbar
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.LoadingState
 import com.kitabisa.test.universitydomains.core.ui.component.UniversityFeed
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 import com.kitabisa.test.universitydomains.navigation.TopLevelDestination
 
 @Composable
@@ -79,5 +82,53 @@ fun FavoriteScreen(
                 }
             }
         }
+    }
+}
+
+@Preview()
+@Composable
+private fun FavoriteScreenSuccessPreview() {
+    UniversityDomainsTheme {
+        FavoriteScreen(
+            uiState = FavoriteUiState.Success(UniversityTestData.favoriteSavableUniversities),
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview()
+@Composable
+private fun FavoriteScreenLoadingPreview() {
+    UniversityDomainsTheme {
+        FavoriteScreen(
+            uiState = FavoriteUiState.Loading,
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview()
+@Composable
+private fun FavoriteScreenErrorPreview() {
+    UniversityDomainsTheme {
+        FavoriteScreen(
+            uiState = FavoriteUiState.Error(UniversityTestData.errorMessage),
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
+    }
+}
+
+@Preview()
+@Composable
+private fun FavoriteScreenEmptyPreview() {
+    UniversityDomainsTheme {
+        FavoriteScreen(
+            uiState = FavoriteUiState.Empty,
+            onFavoriteClick = {},
+            onRetryClick = {}
+        )
     }
 }

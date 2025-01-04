@@ -17,15 +17,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kitabisa.test.universitydomains.R
 import com.kitabisa.test.universitydomains.core.model.SavableUniversity
 import com.kitabisa.test.universitydomains.core.testing.constant.TestTag
+import com.kitabisa.test.universitydomains.core.testing.data.UniversityTestData
 import com.kitabisa.test.universitydomains.core.ui.component.Appbar
 import com.kitabisa.test.universitydomains.core.ui.component.EmptyState
 import com.kitabisa.test.universitydomains.core.ui.component.ErrorState
 import com.kitabisa.test.universitydomains.core.ui.component.LoadingState
 import com.kitabisa.test.universitydomains.core.ui.component.UniversityFeed
+import com.kitabisa.test.universitydomains.core.ui.theme.UniversityDomainsTheme
 import com.kitabisa.test.universitydomains.navigation.TopLevelDestination
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -112,5 +115,80 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview()
+@Composable
+private fun HomeScreenSuccessPreview() {
+    UniversityDomainsTheme {
+        HomeScreen(
+            uiState = HomeUiState.Success(UniversityTestData.savableUniversities),
+            isRefreshing = false,
+            onRefresh = {},
+            onFavoriteClick = {},
+            onRetryClick = {},
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview()
+@Composable
+private fun HomeScreenLoadingPreview() {
+    UniversityDomainsTheme {
+        HomeScreen(
+            uiState = HomeUiState.Loading,
+            isRefreshing = false,
+            onRefresh = {},
+            onFavoriteClick = {},
+            onRetryClick = {},
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview()
+@Composable
+private fun HomeScreenErrorPreview() {
+    UniversityDomainsTheme {
+        HomeScreen(
+            uiState = HomeUiState.Error(UniversityTestData.errorMessage),
+            isRefreshing = false,
+            onRefresh = {},
+            onFavoriteClick = {},
+            onRetryClick = {},
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview()
+@Composable
+private fun HomeScreenEmptyPreview() {
+    UniversityDomainsTheme {
+        HomeScreen(
+            uiState = HomeUiState.Empty,
+            isRefreshing = false,
+            onRefresh = {},
+            onFavoriteClick = {},
+            onRetryClick = {},
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview()
+@Composable
+private fun HomeScreenRefreshingPreview() {
+    UniversityDomainsTheme {
+        HomeScreen(
+            uiState = HomeUiState.Success(UniversityTestData.savableUniversities),
+            isRefreshing = true,
+            onRefresh = {},
+            onFavoriteClick = {},
+            onRetryClick = {},
+        )
     }
 }
